@@ -1,1 +1,0 @@
-export { default as DashboardView } from './src/views/DashboardView';

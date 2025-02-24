@@ -28,6 +28,8 @@ import FlashProvider from '../components/FlashProvider';
 import { theme } from '../preamble';
 import { EmbeddedUiConfigProvider } from '../components/UiConfigContext';
 import { DynamicPluginProvider } from '../components/DynamicPlugins';
+import { QueryParamProvider } from 'use-query-params';
+import { Route } from 'react-router-dom';
 
 const { common } = getBootstrapData();
 
@@ -46,10 +48,10 @@ export const RootContextProviders: React.FC = ({ children }) => {
             <FlashProvider messages={common.flash_messages}>
               <EmbeddedUiConfigProvider>
                 <DynamicPluginProvider>
-                  {/* <QueryParamProvider
+                  <QueryParamProvider
                     ReactRouterRoute={Route}
                     stringifyOptions={{ encode: false }}
-                  > */}
+                  >
                     {RootContextProviderExtension ? (
                       <RootContextProviderExtension>
                         {children}
@@ -57,7 +59,7 @@ export const RootContextProviders: React.FC = ({ children }) => {
                     ) : (
                       children
                     )}
-                  {/* </QueryParamProvider> */}
+                  </QueryParamProvider>
                 </DynamicPluginProvider>
               </EmbeddedUiConfigProvider>
             </FlashProvider>
