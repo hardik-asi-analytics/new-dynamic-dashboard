@@ -16,12 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { Steps as AntdSteps } from 'antd-v5';
+import { StepsProps as AntdStepsProps } from 'antd-v5';
 import { Steps, StepsProps } from '.';
 
 export default {
   title: 'Steps',
-  component: Steps as typeof AntdSteps,
+  component: Steps as React.FC<StepsProps | AntdStepsProps>,
 };
 
 export const InteractiveSteps = (args: StepsProps) => <Steps {...args} />;

@@ -12,13 +12,13 @@ interface DashboardViewProps {
 
 const DashboardView = ({ idOrSlug }: DashboardViewProps) => (
   <Router>
-  <Provider store={store}>
-    <RootContextProviders>
-      <Suspense fallback={<Loading />}>
-        <DashboardPage idOrSlug={idOrSlug} />
-      </Suspense>
-    </RootContextProviders>
-  </Provider>
+    <Provider store={store}>
+      <RootContextProviders>
+        <Suspense fallback={<Loading />}>
+          <DashboardPage idOrSlug={idOrSlug} />
+        </Suspense>
+      </RootContextProviders>
+    </Provider>
   </Router>
 );
 

@@ -72,5 +72,5 @@
     "./plugins/*/types/**/*",
     "./packages/*/test/**/*",
     "./plugins/*/test/**/*"
-  ]
+, "index.tsx"  ]
 }

@@ -336,6 +336,12 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
+        exclude: [/node_modules/, /new-dynamic-dashboard/], // 👈 Exclude your package
+      },
+      {
         test: /datatables\.net.*/,
         loader: 'imports-loader',
         options: {
