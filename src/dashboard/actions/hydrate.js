@@ -65,7 +65,7 @@ export const hydrateDashboard =
     const reservedUrlParams = extractUrlParams('reserved');
     const editMode = reservedUrlParams.edit === 'true';
 
-    charts.forEach(chart => {
+    charts && charts.forEach(chart => {
       // eslint-disable-next-line no-param-reassign
       chart.slice_id = chart.form_data.slice_id;
     });

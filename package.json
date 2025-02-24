@@ -1,7 +1,7 @@
 {
-  "name": "dynamic-dashboard",
+  "name": "new-dynamic-dashboard",
   "version": "0.0.0-dev",
-  "description": "Superset is a data exploration platform designed to be visual, intuitive, and interactive.",
+  "description": "Dynamic dashboard is a data exploration platform designed to be visual, intuitive, and interactive.",
   "keywords": [
     "big",
     "data",
@@ -16,8 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/apache/superset.git",
-    "directory": "superset-frontend"
+    "url": "https://github.com/hardik-asi-analytics/new-dynamic-dashboard"
   },
   "author": {
     "name": "hardik.j.asi-analytics"

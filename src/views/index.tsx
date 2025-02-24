@@ -19,10 +19,10 @@
 
 
 
-// import ReactDOM from 'react-dom';
-// import DashboardView from './DashboardView';
+import ReactDOM from 'react-dom';
+import DashboardView from './DashboardView';
 
-// ReactDOM.render(<DashboardView idOrSlug={'16'} />, document.getElementById('app'));
+ReactDOM.render(<DashboardView idOrSlug={'43'} />, document.getElementById('app'));
 
-export { default as DashboardView } from './DashboardView';
+// export { default as DashboardView } from './DashboardView';
 
