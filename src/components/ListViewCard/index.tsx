@@ -16,13 +16,13 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { ReactNode, ComponentType, ReactElement } from 'react';
+import { ReactNode, ComponentType, ReactElement, FC } from 'react';
 import { styled, useTheme } from '@superset-ui/core';
 import { Skeleton, Card } from 'src/components';
 import { Tooltip } from 'src/components/Tooltip';
 import { theme as supersetTheme } from 'src/preamble';
 import { ConfigProvider } from 'antd-v5';
-import { BackgroundPosition } from './ImageLoader';
+import ImageLoader, { BackgroundPosition } from './ImageLoader';
 import CertifiedBadge from '../CertifiedBadge';
 
 const ActionsWrapper = styled.div`
@@ -145,9 +145,9 @@ interface LinkProps {
   to: string;
 }
 
-// const AnchorLink: FC<LinkProps> = ({ to, children }) => (
-//   <a href={to}>{children}</a>
-// );
+const AnchorLink: FC<LinkProps> = ({ to, children }) => (
+  <a href={to}>{children}</a>
+);
 
 interface CardProps {
   title?: ReactNode;
@@ -173,19 +173,23 @@ interface CardProps {
 function ListViewCard({
   title,
   subtitle,
+  url,
+  linkComponent,
   titleRight,
+  imgURL,
+  imgFallbackURL,
   description,
   coverLeft,
   coverRight,
   actions,
   avatar,
   loading,
-  // imgPosition = 'top',
+  imgPosition = 'top',
   cover,
   certifiedBy,
   certificationDetails,
 }: CardProps) {
-  // const Link = url && linkComponent ? linkComponent : AnchorLink;
+  const Link = url && linkComponent ? linkComponent : AnchorLink;
   const theme = useTheme();
   return (
     <ConfigProvider theme={listViewCardTheme}>
@@ -195,7 +199,7 @@ function ListViewCard({
         cover={
           cover || (
             <Cover>
-              {/* <Link to={url!}>
+              <Link to={url!}>
                 <div className="gradient-container">
                   <ImageLoader
                     src={imgURL || ''}
@@ -204,7 +208,7 @@ function ListViewCard({
                     position={imgPosition}
                   />
                 </div>
-              </Link> */}
+              </Link>
               <CoverFooter className="cover-footer">
                 {!loading && coverLeft && (
                   <CoverFooterLeft>{coverLeft}</CoverFooterLeft>

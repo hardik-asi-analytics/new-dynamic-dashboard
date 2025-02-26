@@ -18,6 +18,7 @@
  */
 import { createContext, lazy, FC, useEffect, useMemo, useRef } from 'react';
 import { Global } from '@emotion/react';
+import { useHistory } from 'react-router-dom';
 import { t, useTheme } from '@superset-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
@@ -110,7 +111,7 @@ const selectActiveFilters = createSelector(
 export const DashboardPage: FC<PageProps> = ({ idOrSlug }: PageProps) => {
   const theme = useTheme();
   const dispatch = useDispatch();
-  // const history = useHistory();
+  const history = useHistory();
   const dashboardPageId = useMemo(() => nanoid(), []);
   const hasDashboardInfoInitiated = useSelector<RootState, Boolean>(
     ({ dashboardInfo }) =>
@@ -184,6 +185,7 @@ export const DashboardPage: FC<PageProps> = ({ idOrSlug }: PageProps) => {
         }
         dispatch(
           hydrateDashboard({
+            history,
             dashboard,
             charts,
             activeTabs,

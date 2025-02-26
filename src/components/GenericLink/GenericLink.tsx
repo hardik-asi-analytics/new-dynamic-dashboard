@@ -18,7 +18,7 @@
  */
 
 import { PropsWithoutRef, RefAttributes } from 'react';
-import { LinkProps } from 'react-router-dom';
+import { Link, LinkProps } from 'react-router-dom';
 import { isUrlExternal, parseUrl } from 'src/utils/urlUtils';
 
 export const GenericLink = <S,>({
@@ -36,16 +36,16 @@ export const GenericLink = <S,>({
       </a>
     );
   }
-  return (''
-    // <Link
-    //   data-test="internal-link"
-    //   to={to}
-    //   component={component}
-    //   replace={replace}
-    //   innerRef={innerRef}
-    //   {...rest}
-    // >
-    //   {children}
-    // </Link>
+  return (
+    <Link
+      data-test="internal-link"
+      to={to}
+      component={component}
+      replace={replace}
+      innerRef={innerRef}
+      {...rest}
+    >
+      {children}
+    </Link>
   );
 };

@@ -47,21 +47,21 @@ interface DatasetUsageProps {
 
 const DEFAULT_PAGE_SIZE = 25;
 
-// const getLinkProps = (dashboard: ChartLinkedDashboard) => ({
-//   key: dashboard.id,
-//   to: `/superset/dashboard/${dashboard.id}`,
-//   target: '_blank',
-//   rel: 'noreferer noopener',
-//   children: dashboard.dashboard_title,
-// });
+const getLinkProps = (dashboard: ChartLinkedDashboard) => ({
+  key: dashboard.id,
+  to: `/superset/dashboard/${dashboard.id}`,
+  target: '_blank',
+  rel: 'noreferer noopener',
+  children: dashboard.dashboard_title,
+});
 
-// const tooltipItemCSS = (theme: SupersetTheme) => css`
-//   color: ${theme.colors.grayscale.light5};
-//   text-decoration: underline;
-//   &:hover {
-//     color: inherit;
-//   }
-// `;
+const tooltipItemCSS = (theme: SupersetTheme) => css`
+  color: ${theme.colors.grayscale.light5};
+  text-decoration: underline;
+  &:hover {
+    color: inherit;
+  }
+`;
 
 const columns: ColumnsType<Chart> = [
   {
@@ -113,11 +113,9 @@ const columns: ColumnsType<Chart> = [
     render: (value, record) => (
       <TruncatedList<ChartLinkedDashboard>
         items={record.dashboards}
-        renderVisibleItem={dashboard => ''
-        // <Link {...getLinkProps(dashboard)} />
-      }
-        renderTooltipItem={dashboard => (''
-          // <Link {...getLinkProps(dashboard)} css={tooltipItemCSS} />
+        renderVisibleItem={dashboard => <Link {...getLinkProps(dashboard)} />}
+        renderTooltipItem={dashboard => (
+          <Link {...getLinkProps(dashboard)} css={tooltipItemCSS} />
         )}
         getKey={dashboard => dashboard.id}
       />

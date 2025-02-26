@@ -24,6 +24,7 @@ import { Row, Col, Grid } from 'src/components';
 import { MainNav, MenuMode } from 'src/components/Menu';
 import { Tooltip } from 'src/components/Tooltip';
 import { NavLink, useLocation } from 'react-router-dom';
+import { GenericLink } from 'src/components/GenericLink/GenericLink';
 import Icons from 'src/components/Icons';
 import { useUiConfig } from 'src/components/UiConfigContext';
 import { URL_PARAMS } from 'src/constants';
@@ -249,10 +250,10 @@ export function Menu({
             title={brand.tooltip}
             arrow={{ pointAtCenter: true }}
           >
-            {isFrontendRoute(window.location.pathname) ? (<></>
-              // <GenericLink className="navbar-brand" to={brand.path}>
-              //   <img src={brand.icon} alt={brand.alt} />
-              // </GenericLink>
+            {isFrontendRoute(window.location.pathname) ? (
+              <GenericLink className="navbar-brand" to={brand.path}>
+                <img src={brand.icon} alt={brand.alt} />
+              </GenericLink>
             ) : (
               <a className="navbar-brand" href={brand.path} tabIndex={-1}>
                 <img src={brand.icon} alt={brand.alt} />

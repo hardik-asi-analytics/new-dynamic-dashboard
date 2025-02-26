@@ -23,7 +23,7 @@ import {
   t,
 } from '@superset-ui/core';
 import { FunctionComponent, useState, useMemo, useCallback, Key } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import rison from 'rison';
 import {
   createFetchRelated,
@@ -54,6 +54,7 @@ import InfoTooltip from 'src/components/InfoTooltip';
 import ImportModelsModal from 'src/components/ImportModal/index';
 import WarningIconWithTooltip from 'src/components/WarningIconWithTooltip';
 import { isUserAdmin } from 'src/dashboard/util/permissionUtils';
+import { GenericLink } from 'src/components/GenericLink/GenericLink';
 
 import {
   PAGE_SIZE,
@@ -297,16 +298,16 @@ const DatasetList: FunctionComponent<DatasetListProps> = ({
         }: any) => {
           let titleLink: JSX.Element;
           if (PREVENT_UNSAFE_DEFAULT_URLS_ON_DATASET) {
-            titleLink = (<></>
-              // <Link data-test="internal-link" to={exploreURL}>
-              //   {datasetTitle}
-              // </Link>
+            titleLink = (
+              <Link data-test="internal-link" to={exploreURL}>
+                {datasetTitle}
+              </Link>
             );
           } else {
-            titleLink = (<></>
+            titleLink = (
               // exploreUrl can be a link to Explore or an external link
               // in the first case use SPA routing, else use HTML anchor
-              // <GenericLink to={exploreURL}>{datasetTitle}</GenericLink>
+              <GenericLink to={exploreURL}>{datasetTitle}</GenericLink>
             );
           }
           try {

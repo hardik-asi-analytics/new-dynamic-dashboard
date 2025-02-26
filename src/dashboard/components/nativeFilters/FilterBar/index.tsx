@@ -39,7 +39,7 @@ import {
   usePrevious,
   styled,
 } from '@superset-ui/core';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { updateDataMask, clearDataMask } from 'src/dataMask/actions';
 import { useImmer } from 'use-immer';
 import { isEmpty, isEqual, debounce } from 'lodash';
@@ -71,28 +71,29 @@ const HiddenFilterBar = styled.div`
   display: none;
 `;
 
-// const EXCLUDED_URL_PARAMS: string[] = [
-//   URL_PARAMS.nativeFilters.name,
-//   URL_PARAMS.permalinkKey.name,
-// ];
+const EXCLUDED_URL_PARAMS: string[] = [
+  URL_PARAMS.nativeFilters.name,
+  URL_PARAMS.permalinkKey.name,
+];
 
 const publishDataMask = debounce(
   async (
+    history,
     dashboardId,
     updateKey,
     dataMaskSelected: DataMaskStateWithId,
     tabId,
   ) => {
-    // const { location } = history;
-    // const { search } = location;
-    // const previousParams = new URLSearchParams(search);
-    // const newParams = new URLSearchParams();
+    const { location } = history;
+    const { search } = location;
+    const previousParams = new URLSearchParams(search);
+    const newParams = new URLSearchParams();
     let dataMaskKey: string | null;
-    // previousParams.forEach((value, key) => {
-    //   if (!EXCLUDED_URL_PARAMS.includes(key)) {
-    //     newParams.append(key, value);
-    //   }
-    // });
+    previousParams.forEach((value, key) => {
+      if (!EXCLUDED_URL_PARAMS.includes(key)) {
+        newParams.append(key, value);
+      }
+    });
 
     const nativeFiltersCacheKey = getUrlParam(URL_PARAMS.nativeFiltersKey);
     const dataMask = JSON.stringify(dataMaskSelected);
@@ -111,7 +112,7 @@ const publishDataMask = debounce(
       dataMaskKey = await createFilterKey(dashboardId, dataMask, tabId);
     }
     if (dataMaskKey) {
-      // newParams.set(URL_PARAMS.nativeFiltersKey.name, dataMaskKey);
+      newParams.set(URL_PARAMS.nativeFiltersKey.name, dataMaskKey);
     }
 
     // pathname could be updated somewhere else through window.history
@@ -119,10 +120,10 @@ const publishDataMask = debounce(
     // replace params only when current page is /superset/dashboard
     // this prevents a race condition between updating filters and navigating to Explore
     if (window.location.pathname.includes('/superset/dashboard')) {
-      // history.location.pathname = window.location.pathname;
-      // history.replace({
-      //   search: newParams.toString(),
-      // });
+      history.location.pathname = window.location.pathname;
+      history.replace({
+        search: newParams.toString(),
+      });
     }
   },
   SLOW_DEBOUNCE,
@@ -133,7 +134,7 @@ const FilterBar: FC<FiltersBarProps> = ({
   verticalConfig,
   hidden = false,
 }) => {
-  // const history = useHistory();
+  const history = useHistory();
   const dataMaskApplied: DataMaskStateWithId = useNativeFiltersDataMask();
   const [dataMaskSelected, setDataMaskSelected] =
     useImmer<DataMaskStateWithId>(dataMaskApplied);
@@ -228,10 +229,10 @@ const FilterBar: FC<FiltersBarProps> = ({
   useEffect(() => {
     // embedded users can't persist filter combinations
     if (user?.userId) {
-      publishDataMask( dashboardId, updateKey, dataMaskApplied, tabId);
+      publishDataMask(history, dashboardId, updateKey, dataMaskApplied, tabId);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dashboardId, dataMaskAppliedText, updateKey, tabId]);
+  }, [dashboardId, dataMaskAppliedText, history, updateKey, tabId]);
 
   const handleApply = useCallback(() => {
     dispatch(logEvent(LOG_ACTIONS_CHANGE_DASHBOARD_FILTER, {}));

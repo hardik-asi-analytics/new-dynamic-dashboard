@@ -17,6 +17,7 @@
  * under the License.
  */
 import { useCallback, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { styled, SupersetClient, t, useTheme } from '@superset-ui/core';
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/cjs/light';
 import sql from 'react-syntax-highlighter/dist/cjs/languages/hljs/sql';
@@ -196,7 +197,7 @@ const SavedQueries = ({
       <Menu>
         {canEdit && (
           <Menu.Item>
-            {/* <Link to={`/sqllab?savedQueryId=${query.id}`}>{t('Edit')}</Link> */}
+            <Link to={`/sqllab?savedQueryId=${query.id}`}>{t('Edit')}</Link>
           </Menu.Item>
         )}
         <Menu.Item
@@ -255,11 +256,11 @@ const SavedQueries = ({
         ]}
         buttons={[
           {
-            name: (''
-              // <Link to="/sqllab?new=true">
-              //   <i className="fa fa-plus" />
-              //   {t('SQL Query')}
-              // </Link>
+            name: (
+              <Link to="/sqllab?new=true">
+                <i className="fa fa-plus" />
+                {t('SQL Query')}
+              </Link>
             ),
             buttonStyle: 'tertiary',
           },

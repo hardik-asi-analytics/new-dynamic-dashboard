@@ -28,7 +28,7 @@ import {
 } from '@superset-ui/core';
 import { getUrlParam } from 'src/utils/urlUtils';
 import { FilterPlugins, URL_PARAMS } from 'src/constants';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import Button from 'src/components/Button';
 import { AsyncSelect } from 'src/components';
 import { Steps } from 'src/components/Steps';
@@ -295,9 +295,9 @@ export class ChartCreation extends PureComponent<
     const VIEW_INSTRUCTIONS_TEXT = t('view instructions');
     const datasetHelpText = this.state.canCreateDataset ? (
       <span data-test="dataset-write">
-        {/* <Link to="/dataset/add/" data-test="add-chart-new-dataset">
+        <Link to="/dataset/add/" data-test="add-chart-new-dataset">
           {t('Add a dataset')}{' '}
-        </Link> */}
+        </Link>
         {t('or')}{' '}
         <a
           href="https://superset.apache.org/docs/creating-charts-dashboards/creating-your-first-dashboard/#registering-a-new-table"

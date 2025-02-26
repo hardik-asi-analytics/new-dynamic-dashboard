@@ -17,8 +17,11 @@
  * under the License.
  */
 import { useEffect, useState } from 'react';
+import { extendedDayjs } from 'src/utils/dates';
 import { styled, t } from '@superset-ui/core';
 import { setItem, LocalStorageKeys } from 'src/utils/localStorageHelpers';
+import { Link } from 'react-router-dom';
+import ListViewCard from 'src/components/ListViewCard';
 import { Dashboard, SavedQueryObject, TableTab } from 'src/views/CRUD/types';
 import { ActivityData, LoadingCards } from 'src/pages/Home';
 import {
@@ -27,6 +30,7 @@ import {
   getEditedObjects,
 } from 'src/views/CRUD/utils';
 import { Chart } from 'src/types/Chart';
+import Icons from 'src/components/Icons';
 import SubMenu from './SubMenu';
 import EmptyState from './EmptyState';
 import { WelcomeTable } from './types';
@@ -78,27 +82,27 @@ const Styles = styled.div`
   }
 `;
 
-// const UNTITLED = t('[Untitled]');
-// const UNKNOWN_TIME = t('Unknown');
+const UNTITLED = t('[Untitled]');
+const UNKNOWN_TIME = t('Unknown');
 
-// const getEntityTitle = (entity: ActivityObject) => {
-//   if ('dashboard_title' in entity) return entity.dashboard_title || UNTITLED;
-//   if ('slice_name' in entity) return entity.slice_name || UNTITLED;
-//   if ('label' in entity) return entity.label || UNTITLED;
-//   return entity.item_title || UNTITLED;
-// };
+const getEntityTitle = (entity: ActivityObject) => {
+  if ('dashboard_title' in entity) return entity.dashboard_title || UNTITLED;
+  if ('slice_name' in entity) return entity.slice_name || UNTITLED;
+  if ('label' in entity) return entity.label || UNTITLED;
+  return entity.item_title || UNTITLED;
+};
 
-// const getEntityIcon = (entity: ActivityObject) => {
-//   if ('sql' in entity) return <Icons.Sql />;
-//   const url = 'item_url' in entity ? entity.item_url : entity.url;
-//   if (url?.includes('dashboard')) {
-//     return <Icons.NavDashboard />;
-//   }
-//   if (url?.includes('explore')) {
-//     return <Icons.NavCharts />;
-//   }
-//   return null;
-// };
+const getEntityIcon = (entity: ActivityObject) => {
+  if ('sql' in entity) return <Icons.Sql />;
+  const url = 'item_url' in entity ? entity.item_url : entity.url;
+  if (url?.includes('dashboard')) {
+    return <Icons.NavDashboard />;
+  }
+  if (url?.includes('explore')) {
+    return <Icons.NavCharts />;
+  }
+  return null;
+};
 
 const getEntityUrl = (entity: ActivityObject) => {
   if ('sql' in entity) return `/sqllab?savedQueryId=${entity.id}`;
@@ -106,19 +110,19 @@ const getEntityUrl = (entity: ActivityObject) => {
   return entity.item_url;
 };
 
-// const getEntityLastActionOn = (entity: ActivityObject) => {
-//   if ('time' in entity) {
-//     return t('Viewed %s', extendedDayjs(entity.time).fromNow());
-//   }
+const getEntityLastActionOn = (entity: ActivityObject) => {
+  if ('time' in entity) {
+    return t('Viewed %s', extendedDayjs(entity.time).fromNow());
+  }
 
-//   let time: number | string | undefined | null;
-//   if ('changed_on' in entity) time = entity.changed_on;
-//   if ('changed_on_utc' in entity) time = entity.changed_on_utc;
-//   return t(
-//     'Modified %s',
-//     time == null ? UNKNOWN_TIME : extendedDayjs(time).fromNow(),
-//   );
-// };
+  let time: number | string | undefined | null;
+  if ('changed_on' in entity) time = entity.changed_on;
+  if ('changed_on_utc' in entity) time = entity.changed_on_utc;
+  return t(
+    'Modified %s',
+    time == null ? UNKNOWN_TIME : extendedDayjs(time).fromNow(),
+  );
+};
 
 export default function ActivityTable({
   activeChild,
@@ -180,10 +184,10 @@ export default function ActivityTable({
         : activityData[activeChild as keyof ActivityData]) ?? [];
     return activities.map((entity: ActivityObject) => {
       const url = getEntityUrl(entity);
-      // const lastActionOn = getEntityLastActionOn(entity);
+      const lastActionOn = getEntityLastActionOn(entity);
       return (
         <CardStyles key={url}>
-          {/* <Link to={url}>
+          <Link to={url}>
             <ListViewCard
               cover={<></>}
               url={url}
@@ -192,7 +196,7 @@ export default function ActivityTable({
               avatar={getEntityIcon(entity)}
               actions={null}
             />
-          </Link> */}
+          </Link>
         </CardStyles>
       );
     });

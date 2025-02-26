@@ -57,7 +57,7 @@ import { FilterBarOrientation } from '../types';
 export const HYDRATE_DASHBOARD = 'HYDRATE_DASHBOARD';
 
 export const hydrateDashboard =
-  ({  dashboard, charts, dataMask, activeTabs }) =>
+  ({ history, dashboard, charts, dataMask, activeTabs }) =>
   (dispatch, getState) => {
     const { user, common, dashboardState } = getState();
     const { metadata, position_data: positionData } = dashboard;
@@ -65,7 +65,7 @@ export const hydrateDashboard =
     const reservedUrlParams = extractUrlParams('reserved');
     const editMode = reservedUrlParams.edit === 'true';
 
-    charts && charts.forEach(chart => {
+    charts.forEach(chart => {
       // eslint-disable-next-line no-param-reassign
       chart.slice_id = chart.form_data.slice_id;
     });
@@ -213,9 +213,9 @@ export const hydrateDashboard =
       // Removes the focused_chart parameter from the URL
       const params = new URLSearchParams(window.location.search);
       params.delete(URL_PARAMS.dashboardFocusedChart.name);
-      // history.replace({
-      //   search: params.toString(),
-      // });
+      history.replace({
+        search: params.toString(),
+      });
     }
 
     // find direct link component and path from root

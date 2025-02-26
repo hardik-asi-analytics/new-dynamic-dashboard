@@ -44,7 +44,7 @@ import ConfirmStatusChange from 'src/components/ConfirmStatusChange';
 import { TagsList } from 'src/components/Tags';
 import SubMenu, { SubMenuProps } from 'src/features/home/SubMenu';
 import FaveStar from 'src/components/FaveStar';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import ListView, {
   Filter,
   FilterOperator,
@@ -63,6 +63,8 @@ import { Tooltip } from 'src/components/Tooltip';
 import Icons from 'src/components/Icons';
 import { nativeFilterGate } from 'src/dashboard/components/nativeFilters/utils';
 import InfoTooltip from 'src/components/InfoTooltip';
+import CertifiedBadge from 'src/components/CertifiedBadge';
+import { GenericLink } from 'src/components/GenericLink/GenericLink';
 import { loadTags } from 'src/components/Tags/utils';
 import FacePile from 'src/components/FacePile';
 import ChartCard from 'src/features/charts/ChartCard';
@@ -341,7 +343,7 @@ function ChartList(props: ChartListProps) {
           },
         }: any) => (
           <FlexRowContainer>
-            {/* <Link to={url} data-test={`${sliceName}-list-chart-title`}>
+            <Link to={url} data-test={`${sliceName}-list-chart-title`}>
               {certifiedBy && (
                 <>
                   <CertifiedBadge
@@ -351,7 +353,7 @@ function ChartList(props: ChartListProps) {
                 </>
               )}
               {sliceName}
-            </Link> */}
+            </Link>
             {description && <InfoTooltip tooltip={description} />}
           </FlexRowContainer>
         ),
@@ -378,7 +380,7 @@ function ChartList(props: ChartListProps) {
           },
         }: any) => (
           <Tooltip title={dsNameTxt} placement="top">
-            {/* <GenericLink to={dsUrl}>{dsNameTxt?.split('.')[1]}</GenericLink> */}
+            <GenericLink to={dsUrl}>{dsNameTxt?.split('.')[1]}</GenericLink>
           </Tooltip>
         ),
         Header: t('Dataset'),

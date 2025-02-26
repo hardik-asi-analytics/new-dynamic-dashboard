@@ -35,6 +35,7 @@ import { dangerouslyGetItemDoNotUse } from 'src/utils/localStorageHelpers';
 import withToasts from 'src/components/MessageToasts/withToasts';
 import Icons from 'src/components/Icons';
 import { Tooltip } from 'src/components/Tooltip';
+import { Link } from 'react-router-dom';
 import { deleteTags } from 'src/features/tags/tags';
 import { Tag as AntdTag } from 'antd';
 import { QueryObjectColumns, Tag } from 'src/views/CRUD/types';
@@ -167,7 +168,7 @@ function TagList(props: TagListProps) {
           },
         }: any) => (
           <AntdTag>
-            {/* <Link to={`/superset/all_entities/?id=${id}`}>{tagName}</Link> */}
+            <Link to={`/superset/all_entities/?id=${id}`}>{tagName}</Link>
           </AntdTag>
         ),
         Header: t('Name'),

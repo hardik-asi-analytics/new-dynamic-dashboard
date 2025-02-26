@@ -17,8 +17,10 @@
  * under the License.
  */
 
+import { Route } from 'react-router-dom';
 import { getExtensionsRegistry, ThemeProvider } from '@superset-ui/core';
 import { Provider as ReduxProvider } from 'react-redux';
+import { QueryParamProvider } from 'use-query-params';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import getBootstrapData from 'src/utils/getBootstrapData';
@@ -28,8 +30,6 @@ import FlashProvider from '../components/FlashProvider';
 import { theme } from '../preamble';
 import { EmbeddedUiConfigProvider } from '../components/UiConfigContext';
 import { DynamicPluginProvider } from '../components/DynamicPlugins';
-import { QueryParamProvider } from 'use-query-params';
-import { Route } from 'react-router-dom';
 
 const { common } = getBootstrapData();
 

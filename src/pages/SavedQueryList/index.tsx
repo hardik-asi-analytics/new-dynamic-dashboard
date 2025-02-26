@@ -194,10 +194,10 @@ function SavedQueryList({
   }
 
   subMenuButtons.push({
-    name: (''
-      // <Link to="/sqllab?new=true">
-      //   <i className="fa fa-plus" /> {t('Query')}
-      // </Link>
+    name: (
+      <Link to="/sqllab?new=true">
+        <i className="fa fa-plus" /> {t('Query')}
+      </Link>
     ),
     buttonStyle: 'primary',
   });

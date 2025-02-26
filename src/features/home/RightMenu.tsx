@@ -20,6 +20,7 @@ import { Fragment, useState, useEffect, FC, PureComponent } from 'react';
 
 import rison from 'rison';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { useQueryParams, BooleanParam } from 'use-query-params';
 import { get, isEmpty } from 'lodash';
 
@@ -450,14 +451,14 @@ const RightMenu = ({
                   roles,
                 ) && (
                   <Menu.Item key={menu.label}>
-                    {isFrontendRoute(menu.url) ? (''
-                      // <Link to={menu.url || ''}>
-                      //   <i
-                      //     data-test={`menu-item-${menu.label}`}
-                      //     className={`fa ${menu.icon}`}
-                      //   />{' '}
-                      //   {menu.label}
-                      // </Link>
+                    {isFrontendRoute(menu.url) ? (
+                      <Link to={menu.url || ''}>
+                        <i
+                          data-test={`menu-item-${menu.label}`}
+                          className={`fa ${menu.icon}`}
+                        />{' '}
+                        {menu.label}
+                      </Link>
                     ) : (
                       <a href={menu.url}>
                         <i
@@ -492,8 +493,8 @@ const RightMenu = ({
                   );
                   return (
                     <Menu.Item key={`${child.label}`}>
-                      {isFrontendRoute(child.url) ? (''
-                        // <Link to={child.url || ''}>{menuItemDisplay}</Link>
+                      {isFrontendRoute(child.url) ? (
+                        <Link to={child.url || ''}>{menuItemDisplay}</Link>
                       ) : (
                         <a href={child.url}>{menuItemDisplay}</a>
                       )}

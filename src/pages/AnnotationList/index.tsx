@@ -18,7 +18,7 @@
  */
 
 import { useMemo, useState, useEffect, useCallback } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import {
   css,
   t,
@@ -271,8 +271,8 @@ function AnnotationList({
           <StyledHeader>
             <span>{t('Annotation Layer %s', annotationLayerName)}</span>
             <span>
-              {hasHistory ? (''
-                // <Link to="/annotationlayer/list/">{t('Back to all')}</Link>
+              {hasHistory ? (
+                <Link to="/annotationlayer/list/">{t('Back to all')}</Link>
               ) : (
                 <a href="/annotationlayer/list/">{t('Back to all')}</a>
               )}

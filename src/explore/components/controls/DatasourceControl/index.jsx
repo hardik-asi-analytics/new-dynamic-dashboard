@@ -319,7 +319,7 @@ class DatasourceControl extends PureComponent {
         <Menu.Item key={CHANGE_DATASET}>{t('Swap dataset')}</Menu.Item>
         {!isMissingDatasource && canAccessSqlLab && (
           <Menu.Item key={VIEW_IN_SQL_LAB}>
-            {/* <Link
+            <Link
               to={{
                 pathname: '/sqllab',
                 state: { requestedQuery },
@@ -327,7 +327,7 @@ class DatasourceControl extends PureComponent {
               onClick={preventRouterLinkWhileMetaClicked}
             >
               {t('View in SQL Lab')}
-            </Link> */}
+            </Link>
           </Menu.Item>
         )}
       </Menu>
@@ -359,7 +359,7 @@ class DatasourceControl extends PureComponent {
         </Menu.Item>
         {canAccessSqlLab && (
           <Menu.Item key={VIEW_IN_SQL_LAB}>
-            {/* <Link
+            <Link
               to={{
                 pathname: '/sqllab',
                 state: { requestedQuery },
@@ -367,7 +367,7 @@ class DatasourceControl extends PureComponent {
               onClick={preventRouterLinkWhileMetaClicked}
             >
               {t('View in SQL Lab')}
-            </Link> */}
+            </Link>
           </Menu.Item>
         )}
         <Menu.Item key={SAVE_AS_DATASET}>{t('Save as dataset')}</Menu.Item>

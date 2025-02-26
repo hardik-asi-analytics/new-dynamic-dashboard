@@ -25,6 +25,7 @@ import {
 } from '@superset-ui/core';
 import { useSelector } from 'react-redux';
 import { useState, useMemo, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import rison from 'rison';
 import {
   createFetchRelated,
@@ -61,6 +62,7 @@ import {
   Dashboard as CRUDDashboard,
   QueryObjectColumns,
 } from 'src/views/CRUD/types';
+import CertifiedBadge from 'src/components/CertifiedBadge';
 import { loadTags } from 'src/components/Tags/utils';
 import DashboardCard from 'src/features/dashboards/DashboardCard';
 import { DashboardStatus } from 'src/features/dashboards/types';
@@ -117,11 +119,14 @@ const DASHBOARD_COLUMNS_TO_FETCH = [
   'url',
   'slug',
   'changed_by',
+  'changed_by.id',
+  'changed_by.first_name',
+  'changed_by.last_name',
   'changed_on_delta_humanized',
+  'owners',
   'owners.id',
   'owners.first_name',
   'owners.last_name',
-  'owners',
   'tags.id',
   'tags.name',
   'tags.type',
@@ -321,18 +326,18 @@ function DashboardList(props: DashboardListProps) {
               certification_details: certificationDetails,
             },
           },
-        }: any) => (''
-          // <Link to={url}>
-          //   {certifiedBy && (
-          //     <>
-          //       <CertifiedBadge
-          //         certifiedBy={certifiedBy}
-          //         details={certificationDetails}
-          //       />{' '}
-          //     </>
-          //   )}
-          //   {dashboardTitle}
-          // </Link>
+        }: any) => (
+          <Link to={url}>
+            {certifiedBy && (
+              <>
+                <CertifiedBadge
+                  certifiedBy={certifiedBy}
+                  details={certificationDetails}
+                />{' '}
+              </>
+            )}
+            {dashboardTitle}
+          </Link>
         ),
         Header: t('Name'),
         accessor: 'dashboard_title',

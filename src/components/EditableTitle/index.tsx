@@ -17,8 +17,9 @@
  * under the License.
  */
 import { useEffect, useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import cx from 'classnames';
-import { styled, t } from '@superset-ui/core';
+import { css, styled, SupersetTheme, t } from '@superset-ui/core';
 import { Tooltip } from 'src/components/Tooltip';
 import CertifiedBadge from '../CertifiedBadge';
 
@@ -218,21 +219,21 @@ export default function EditableTitle({
   }
   if (!canEdit) {
     // don't actually want an input in this case
-    titleComponent = url ? (<></>
-      // <Link
-      //   to={url}
-      //   data-test="editable-title-input"
-      //   css={(theme: SupersetTheme) => css`
-      //     color: ${theme.colors.grayscale.dark1};
-      //     text-decoration: none;
-      //     :hover {
-      //       text-decoration: underline;
-      //     }
-      //     display: inline-block;
-      //   `}
-      // >
-      //   {value}
-      // </Link>
+    titleComponent = url ? (
+      <Link
+        to={url}
+        data-test="editable-title-input"
+        css={(theme: SupersetTheme) => css`
+          color: ${theme.colors.grayscale.dark1};
+          text-decoration: none;
+          :hover {
+            text-decoration: underline;
+          }
+          display: inline-block;
+        `}
+      >
+        {value}
+      </Link>
     ) : (
       <span data-test="editable-title-input">{value}</span>
     );

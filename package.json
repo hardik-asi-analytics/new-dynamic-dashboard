@@ -1,6 +1,6 @@
 {
   "name": "new-dynamic-dashboard",
-  "version": "0.0.8-dev",
+  "version": "0.0.14-dev",
   "description": "Dynamic dashboard is a data exploration platform designed to be visual, intuitive, and interactive.",
   "keywords": [
     "big",
@@ -14,8 +14,10 @@
     "database",
     "flask"
   ],
-  "main": "index.jsx",
-  "types": "index.d.ts",
+  "main": "dist/index.jsx",
+  "module": "dist/index.jsx",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
   "repository": {
     "type": "git",
     "url": "https://github.com/hardik-asi-analytics/new-dynamic-dashboard"
@@ -122,7 +124,7 @@
     "@visx/xychart": "^3.5.1",
     "abortcontroller-polyfill": "^1.7.8",
     "ace-builds": "^1.36.3",
-    "ag-grid-community": "32.2.1",
+    "ag-grid-community": "^32.2.1",
     "ag-grid-react": "32.2.1",
     "antd": "4.10.3",
     "antd-v5": "npm:antd@^5.18.0",

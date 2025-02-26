@@ -20,7 +20,7 @@
 import { css, styled, t } from '@superset-ui/core';
 import dayjs from 'dayjs';
 import { useEffect, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ListView from 'src/components/ListView';
 import { Tooltip } from 'src/components/Tooltip';
 import SubMenu from 'src/features/home/SubMenu';
@@ -167,7 +167,7 @@ function ExecutionLog({
     ],
     [isReportEnabled],
   );
-  // const path = `/${isReportEnabled ? 'report' : 'alert'}/list/`;
+  const path = `/${isReportEnabled ? 'report' : 'alert'}/list/`;
   const ALERT_TEXT = t('Alert');
   const REPORT_TEXT = t('Report');
 
@@ -187,7 +187,7 @@ function ExecutionLog({
               {alertResource?.name}
             </span>
             <span>
-              {/* <Link to={path}>{t('Back to all')}</Link> */}
+              <Link to={path}>{t('Back to all')}</Link>
             </span>
           </StyledHeader>
         }
