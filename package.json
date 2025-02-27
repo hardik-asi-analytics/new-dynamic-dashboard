@@ -1,6 +1,6 @@
 {
   "name": "new-dynamic-dashboard",
-  "version": "0.0.14-dev",
+  "version": "0.0.15-dev",
   "description": "Dynamic dashboard is a data exploration platform designed to be visual, intuitive, and interactive.",
   "keywords": [
     "big",
@@ -14,10 +14,9 @@
     "database",
     "flask"
   ],
-  "main": "dist/index.jsx",
-  "module": "dist/index.jsx",
-  "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "main": "index.jsx",
+  "module": "index.jsx",
+  "types": "commonjs",
   "repository": {
     "type": "git",
     "url": "https://github.com/hardik-asi-analytics/new-dynamic-dashboard"
