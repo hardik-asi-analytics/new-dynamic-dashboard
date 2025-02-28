@@ -17,9 +17,14 @@
  * under the License.
  */
 import { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import cx from 'classnames';
-import { css, styled, SupersetTheme, t } from '@superset-ui/core';
+import { 
+  // css, 
+  styled, 
+  // SupersetTheme, 
+  t 
+} from '@superset-ui/core';
 import { Tooltip } from 'src/components/Tooltip';
 import CertifiedBadge from '../CertifiedBadge';
 

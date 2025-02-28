@@ -71,10 +71,10 @@ const HiddenFilterBar = styled.div`
   display: none;
 `;
 
-const EXCLUDED_URL_PARAMS: string[] = [
-  URL_PARAMS.nativeFilters.name,
-  URL_PARAMS.permalinkKey.name,
-];
+// const EXCLUDED_URL_PARAMS: string[] = [
+//   URL_PARAMS.nativeFilters.name,
+//   URL_PARAMS.permalinkKey.name,
+// ];
 
 const publishDataMask = debounce(
   async (
