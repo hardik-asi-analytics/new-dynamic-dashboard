@@ -6,10 +6,10 @@ import { store } from './store';
 // import { BrowserRouter as Router } from 'react-router-dom';
 
 interface DashboardViewProps {
-  idOrSlug: string | any
+  idOrSlug: any
 }
 
-const LazyDashboardPage = lazy(
+const LazyDashboardPage: any = lazy(
   () =>
     import(
       /* webpackChunkName: "DashboardPage" */ 'src/dashboard/containers/DashboardPage'

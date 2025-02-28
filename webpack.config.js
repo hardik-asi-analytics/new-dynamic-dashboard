@@ -53,19 +53,24 @@ const isDevServer = process.argv[1].includes('webpack-dev-server');
 const ASSET_BASE_URL = process.env.ASSET_BASE_URL || '';
 
 const output = {
-  path: BUILD_DIR,
-  publicPath: `${ASSET_BASE_URL}/static/assets/`,
+  path: path.resolve(__dirname, "dist"), // ✅ Output to "dist" folder
+  filename: "bundle.js", // ✅ Create a single bundle.js file
+  library: "MyLibrary", // ✅ Makes it reusable in another project
+  libraryTarget: "umd", // ✅ UMD format to work in multiple environments
+  globalObject: "this",
+  // path: BUILD_DIR,
+  // publicPath: `${ASSET_BASE_URL}/static/assets/`,
 };
-if (isDevMode) {
-  output.filename = '[name].[contenthash:8].entry.js';
-  output.chunkFilename = '[name].[contenthash:8].chunk.js';
-} else if (nameChunks) {
-  output.filename = '[name].[chunkhash].entry.js';
-  output.chunkFilename = '[name].[chunkhash].chunk.js';
-} else {
-  output.filename = '[name].[chunkhash].entry.js';
-  output.chunkFilename = '[chunkhash].chunk.js';
-}
+// if (isDevMode) {
+//   output.filename = '[name].[contenthash:8].entry.js';
+//   output.chunkFilename = '[name].[contenthash:8].chunk.js';
+// } else if (nameChunks) {
+//   output.filename = '[name].[chunkhash].entry.js';
+//   output.chunkFilename = '[name].[chunkhash].chunk.js';
+// } else {
+//   output.filename = '[name].[chunkhash].entry.js';
+//   output.chunkFilename = '[chunkhash].chunk.js';
+// }
 
 if (!isDevMode) {
   output.clean = true;
@@ -80,7 +85,7 @@ const plugins = [
   // creates a manifest.json mapping of name to hashed output used in template files
   new WebpackManifestPlugin({
     publicPath: output.publicPath,
-    seed: { app: 'superset' },
+    seed: { app: 'new-dynamic-dashboard' },
     // This enables us to include all relevant files for an entry
     generate: (seed, files, entrypoints) => {
       // Each entrypoint's chunk files in the format of
@@ -203,13 +208,14 @@ const babelLoader = {
 };
 
 const config = {
-  entry: {
-    preamble: PREAMBLE,
-    theme: path.join(APP_DIR, '/src/theme.ts'),
-    menu: addPreamble('src/views/menu.tsx'),
-    spa: addPreamble('/src/views/index.tsx'),
-    embedded: addPreamble('/src/embedded/index.tsx'),
-  },
+  entry: path.resolve(APP_DIR, 'src/index.tsx'), 
+  // {
+  //   preamble: PREAMBLE,
+  //   theme: path.join(APP_DIR, '/src/theme.ts'),
+  //   menu: addPreamble('src/views/menu.tsx'),
+  //   spa: addPreamble('/src/views/index.tsx'),
+  //   embedded: addPreamble('/src/embedded/index.tsx'),
+  // },
   cache: {
     type: 'filesystem', // Enable filesystem caching
     cacheDirectory: path.resolve(__dirname, '.temp_cache'),
@@ -242,61 +248,63 @@ const config = {
     },
   },
   optimization: {
-    sideEffects: true,
-    splitChunks: {
-      chunks: 'all',
-      // increase minSize for devMode to 1000kb because of sourcemap
-      minSize: isDevMode ? 1000000 : 20000,
-      name: nameChunks,
-      automaticNameDelimiter: '-',
-      minChunks: 2,
-      cacheGroups: {
-        automaticNamePrefix: 'chunk',
-        // basic stable dependencies
-        vendors: {
-          priority: 50,
-          name: 'vendors',
-          test: new RegExp(
-            `/node_modules/(${[
-              'abortcontroller-polyfill',
-              'react',
-              'react-dom',
-              'prop-types',
-              'react-prop-types',
-              'prop-types-extra',
-              'redux',
-              'react-redux',
-              'react-hot-loader',
-              'react-sortable-hoc',
-              'react-table',
-              'react-ace',
-              '@hot-loader.*',
-              'webpack.*',
-              '@?babel.*',
-              'lodash.*',
-              'antd',
-              '@ant-design.*',
-              '.*bootstrap',
-              'moment',
-              'jquery',
-              'core-js.*',
-              '@emotion.*',
-              'd3',
-              'd3-(array|color|scale|interpolate|format|selection|collection|time|time-format)',
-            ].join('|')})/`,
-          ),
-        },
-        // viz thumbnails are used in `addSlice` and `explore` page
-        thumbnail: {
-          name: 'thumbnail',
-          test: /thumbnail(Large)?\.(png|jpg)/i,
-          priority: 20,
-          enforce: true,
-        },
-      },
-    },
-    usedExports: 'global',
-    minimizer: [new CssMinimizerPlugin(), '...'],
+    splitChunks: false,
+    minimize: true,
+    // sideEffects: true,
+    // splitChunks: {
+    //   chunks: 'all',
+    //   // increase minSize for devMode to 1000kb because of sourcemap
+    //   minSize: isDevMode ? 1000000 : 20000,
+    //   name: nameChunks,
+    //   automaticNameDelimiter: '-',
+    //   minChunks: 2,
+    //   cacheGroups: {
+    //     automaticNamePrefix: 'chunk',
+    //     // basic stable dependencies
+    //     vendors: {
+    //       priority: 50,
+    //       name: 'vendors',
+    //       test: new RegExp(
+    //         `/node_modules/(${[
+    //           'abortcontroller-polyfill',
+    //           'react',
+    //           'react-dom',
+    //           'prop-types',
+    //           'react-prop-types',
+    //           'prop-types-extra',
+    //           'redux',
+    //           'react-redux',
+    //           'react-hot-loader',
+    //           'react-sortable-hoc',
+    //           'react-table',
+    //           'react-ace',
+    //           '@hot-loader.*',
+    //           'webpack.*',
+    //           '@?babel.*',
+    //           'lodash.*',
+    //           'antd',
+    //           '@ant-design.*',
+    //           '.*bootstrap',
+    //           'moment',
+    //           'jquery',
+    //           'core-js.*',
+    //           '@emotion.*',
+    //           'd3',
+    //           'd3-(array|color|scale|interpolate|format|selection|collection|time|time-format)',
+    //         ].join('|')})/`,
+    //       ),
+    //     },
+    //     // viz thumbnails are used in `addSlice` and `explore` page
+    //     thumbnail: {
+    //       name: 'thumbnail',
+    //       test: /thumbnail(Large)?\.(png|jpg)/i,
+    //       priority: 20,
+    //       enforce: true,
+    //     },
+    //   },
+    // },
+    // usedExports: 'global',
+    // minimizer: [new CssMinimizerPlugin(), '...'],
   },
   resolve: {
     // resolve modules from `/superset_frontend/node_modules` and `/superset_frontend`

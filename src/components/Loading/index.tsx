@@ -56,11 +56,11 @@ const LoaderImg = styled.img`
     transform: translate(-50%, -50%);
   }
 `;
-export default function Loading({
+const Loading: React.FC<Props> =({
   position = 'floating',
   image,
   className,
-}: Props) {
+}: Props) => {
   return (
     <LoaderImg
       className={cls('loading', position, className)}
@@ -73,3 +73,5 @@ export default function Loading({
     />
   );
 }
+
+export default Loading
