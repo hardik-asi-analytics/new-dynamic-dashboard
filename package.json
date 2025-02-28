@@ -35,9 +35,10 @@
   ],
   "scripts": {
     "_prettier": "prettier './({src,spec,cypress-base,plugins,packages,.storybook}/**/*{.js,.jsx,.ts,.tsx,.css,.less,.scss,.sass}|package.json)'",
-    "build-package": "tsc",
+    "build-package": "tsc --noEmit",
     "prepare-publish": "cp package.json dist/",
     "publish-package": "npm run build-package && npm run prepare-publish && cd dist && npm publish --access public",
+    "build-1": "webpack",
     "build": "cross-env NODE_OPTIONS=--max_old_space_size=8192 NODE_ENV=production BABEL_ENV=\"${BABEL_ENV:=production}\" webpack --color --mode production",
     "build-dev": "cross-env NODE_OPTIONS=--max_old_space_size=8192 NODE_ENV=development webpack --mode=development --color",
     "build-instrumented": "cross-env NODE_ENV=production BABEL_ENV=instrumented webpack --mode=production --color",

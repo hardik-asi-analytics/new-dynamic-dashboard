@@ -64,6 +64,7 @@
     "./packages/generator-superset/test/**/*"
   ],
   "include": [
+    "src",
     "./src/**/*",
     "./spec/**/*",
     "./packages/*/src/**/*",

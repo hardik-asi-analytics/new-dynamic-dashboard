@@ -1,24 +1,28 @@
-import { Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Provider } from 'react-redux';
 import { RootContextProviders } from './RootContextProviders';
 import Loading from 'src/components/Loading';
-import DashboardPage from 'src/dashboard/containers/DashboardPage';
 import { store } from './store';
-import { BrowserRouter as Router } from 'react-router-dom';
+// import { BrowserRouter as Router } from 'react-router-dom';
 
 interface DashboardViewProps {
-  idOrSlug: string
+  idOrSlug: string | any
 }
 
-const DashboardView = ({ idOrSlug }: DashboardViewProps) => (
+const LazyDashboardPage = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "DashboardPage" */ 'src/dashboard/containers/DashboardPage'
+    ),
+);
+
+const DashboardView: React.FC<DashboardViewProps> = ({ idOrSlug }: DashboardViewProps) => (
     <Provider store={store}>
-      <Router>
-        <RootContextProviders>
-          <Suspense fallback={<Loading />}>
-            <DashboardPage idOrSlug={idOrSlug} />
-          </Suspense>
-        </RootContextProviders>
-      </Router>
+      <RootContextProviders>
+        <Suspense fallback={<Loading />}>
+          <LazyDashboardPage idOrSlug={idOrSlug} />
+        </Suspense>
+      </RootContextProviders>
     </Provider>
 );
 
