@@ -84,16 +84,16 @@ const publishDataMask = debounce(
     dataMaskSelected: DataMaskStateWithId,
     tabId,
   ) => {
-    const { location } = history;
-    const { search } = location;
-    const previousParams = new URLSearchParams(search);
-    const newParams = new URLSearchParams();
+    // const { location } = history;
+    // const { search } = location;
+    // const previousParams = new URLSearchParams(search);
+    // const newParams = new URLSearchParams();
     let dataMaskKey: string | null;
-    previousParams.forEach((value, key) => {
-      if (!EXCLUDED_URL_PARAMS.includes(key)) {
-        newParams.append(key, value);
-      }
-    });
+    // previousParams.forEach((value, key) => {
+    //   if (!EXCLUDED_URL_PARAMS.includes(key)) {
+    //     newParams.append(key, value);
+    //   }
+    // });
 
     const nativeFiltersCacheKey = getUrlParam(URL_PARAMS.nativeFiltersKey);
     const dataMask = JSON.stringify(dataMaskSelected);
@@ -112,19 +112,19 @@ const publishDataMask = debounce(
       dataMaskKey = await createFilterKey(dashboardId, dataMask, tabId);
     }
     if (dataMaskKey) {
-      newParams.set(URL_PARAMS.nativeFiltersKey.name, dataMaskKey);
+      // newParams.set(URL_PARAMS.nativeFiltersKey.name, dataMaskKey);
     }
 
     // pathname could be updated somewhere else through window.history
     // keep react router history in sync with window history
     // replace params only when current page is /superset/dashboard
     // this prevents a race condition between updating filters and navigating to Explore
-    if (window.location.pathname.includes('/superset/dashboard')) {
-      history.location.pathname = window.location.pathname;
-      history.replace({
-        search: newParams.toString(),
-      });
-    }
+    // if (window.location.pathname.includes('/superset/dashboard')) {
+    //   history.location.pathname = window.location.pathname;
+    //   history.replace({
+    //     search: newParams.toString(),
+    //   });
+    // }
   },
   SLOW_DEBOUNCE,
 );

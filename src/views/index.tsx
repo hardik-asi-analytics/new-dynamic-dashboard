@@ -17,6 +17,7 @@
  * under the License.
  */
 import ReactDOM from 'react-dom';
-import App from './App';
+// import App from './App';
+import DashboardView from './DashboardView';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<DashboardView idOrSlug={'43'} />, document.getElementById('app'));

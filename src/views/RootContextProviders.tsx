@@ -17,10 +17,10 @@
  * under the License.
  */
 
-import { Route } from 'react-router-dom';
+// import { Route } from 'react-router-dom';
 import { getExtensionsRegistry, ThemeProvider } from '@superset-ui/core';
 import { Provider as ReduxProvider } from 'react-redux';
-import { QueryParamProvider } from 'use-query-params';
+// import { QueryParamProvider } from 'use-query-params';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import getBootstrapData from 'src/utils/getBootstrapData';
@@ -48,10 +48,10 @@ export const RootContextProviders: React.FC = ({ children }) => {
             <FlashProvider messages={common.flash_messages}>
               <EmbeddedUiConfigProvider>
                 <DynamicPluginProvider>
-                  <QueryParamProvider
+                  {/* <QueryParamProvider
                     ReactRouterRoute={Route}
                     stringifyOptions={{ encode: false }}
-                  >
+                  > */}
                     {RootContextProviderExtension ? (
                       <RootContextProviderExtension>
                         {children}
@@ -59,7 +59,7 @@ export const RootContextProviders: React.FC = ({ children }) => {
                     ) : (
                       children
                     )}
-                  </QueryParamProvider>
+                  {/* </QueryParamProvider> */}
                 </DynamicPluginProvider>
               </EmbeddedUiConfigProvider>
             </FlashProvider>
